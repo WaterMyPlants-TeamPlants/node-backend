@@ -1,19 +1,21 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Endpoints:\r /users/username\r /plant/{plantid}\r /plant/nickname\r /plant/species\r /plant/h2oFrequency\r /plant/image\r CRUD:\r // /users\r GET - { id }\r PUT/PATCH - { username, phoneNumber, password }\r POST - { username, password }\r DELETE\r // /plants\r GET - { id, nickname, species, h2oFrequency, image }\r POST - ''\r PUT/PATCH - ''\r DELETE - ''",
+  "description": "plants backend",
   "main": "index.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "knex": "^0.21.14",
-    "sqlite3": "^5.0.0",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
