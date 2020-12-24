@@ -2,6 +2,7 @@ const db = require("../../data/dbconfig");
 
 module.exports = {
   getById,
+  getPlantsByUser,
   addPlant,
   editPlant,
   deletePlant
@@ -11,6 +12,11 @@ function getById(id) {
   return db("plants")
     .where({ id })
     .first();
+}
+
+function getPlantsByUser(id) {
+  return db("plants")
+    .where("user_id", id)
 }
 
 function addPlant(body) {
