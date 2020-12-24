@@ -11,6 +11,7 @@ module.exports = {
 function getById(id) {
   return db("users")
     .where({ id })
+    .select("username", "id", "telephone")
     .first();
 }
 
