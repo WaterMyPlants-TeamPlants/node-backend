@@ -1,5 +1,5 @@
 const db = require("../../data/dbconfig");
-const usersModels = require("./models");
+const usersModels = require("./UsersModels");
 
 beforeAll(() => {
   db.migrate.rollback();
