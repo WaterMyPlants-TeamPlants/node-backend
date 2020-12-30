@@ -10,7 +10,7 @@ CRUD:
 // /users
 GET - { id }
 PUT/PATCH - { username, phoneNumber, password }
-POST - { username, password }
+POST - under register
 DELETE
 
 // /plants

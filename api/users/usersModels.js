@@ -1,14 +1,14 @@
 const db = require("../../data/dbconfig");
 
 module.exports = {
-  getById,
+  getUserById,
   getByUsername,
   addUser,
   editUser,
   deleteUser
 };
 
-function getById(id) {
+function getUserById(id) {
   return db("users")
     .where({ id })
     .select("username", "id", "telephone")

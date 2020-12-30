@@ -13,7 +13,7 @@ afterAll(async () => {
 });
 
 
-// ---------------------------------- auth server -----------------------------------
+// ------------------------------------------ auth ------------------------------------------
 describe("register user", () => {
   beforeEach(async () => {
     await db("users").truncate();
@@ -22,7 +22,7 @@ describe("register user", () => {
     await db.migrate.rollback();
     await db.migrate.latest();
     await db.seed.run();
-  })
+  });
   const newUser = { username: "tester", password: "pass123", telephone: "111-111-1111" };
   it("should return 201 status code if successful", async () => {
     const expectedStatusCode = 201;
@@ -56,12 +56,12 @@ describe("register user", () => {
 describe("login", () => {
   const newUser = { username: "tester", password: "pass123" };
   beforeAll(async () => {
-    await request(server).post(`/api/register`).send({...newUser, telephone: "111-111-1111"});
-  }) 
+    await request(server).post(`/api/register`).send({ ...newUser, telephone: "111-111-1111" });
+  });
   it("should return 200 status code if successful", async () => {
     const expectedStatusCode = 200;
     const response = await request(server).post(`/api/login`).send(newUser);
-    console.log(response.body)
+    console.log(response.body);
     expect(response.status).toBe(expectedStatusCode);
   });
   it("should return a token", async () => {
@@ -83,84 +83,83 @@ describe("login", () => {
   });
 });
 
-//   // --------------------------------------- users server --------------------------------------
-//   describe("/api/users", () => {
-//     describe("GET /:id", () => {
-//       const id = 1;
-//       it("should return 200 status code if successful", async () => {
-//         const expectedStatusCode = 200;
-//         const response = await request(server).get(`/api/users/${id}`);
-//         expect(response.status).toBe(expectedStatusCode);
-//       });
-//       it("should return the user object", async () => {
-//         const response = await request(server).get(`/api/users/${id}`);
-//         expect(response.body.id).toBe(id);
-//       });
-//       it("should return 404 if no user is found", async () => {
-//         const badId = 123454;
-//         const expectedStatusCode = 404;
-//         const response = await request(server).get(`/api/users/${badId}`);
-//         expect(response.status).toBe(expectedStatusCode);
-//       });
-//     });
-//     describe("GET plants by user /:id/plants", () => {
-//       const id = 1;
-//       it("should return 200 status code if successful", async () => {
-//         const expectedStatusCode = 200;
-//         const response = await request(server).get(`/api/users/${id}`);
-//         expect(response.status).toBe(expectedStatusCode);
-//       });
-//       it("should return the user's plants", async () => {
-//         const response = await request(server).get(`/api/users/${id}`);
-//         expect(response.body).toHaveLength(1);
-//       });
-//       it("should return 404 if no user is found", async () => {
-//         const badId = 123454;
-//         const expectedStatusCode = 404;
-//         const response = await request(server).get(`/api/users/${badId}`);
-//         expect(response.status).toBe(expectedStatusCode);
-//       });
-//     });
+// --------------------------------------- users server --------------------------------------
+describe("/api/users", () => {
+  describe("GET /:id", () => {
+    const id = 1;
+    it("should return 200 status code if successful", async () => {
+      const expectedStatusCode = 200;
+      const response = await request(server).get(`/api/users/${id}`);
+      expect(response.status).toBe(expectedStatusCode);
+    });
+    it("should return the user object", async () => {
+      const response = await request(server).get(`/api/users/${id}`);
+      expect(response.body.id).toBe(id);
+    });
+    it("should return 404 if no user is found", async () => {
+      const badId = 123454;
+      const expectedStatusCode = 404;
+      const response = await request(server).get(`/api/users/${badId}`);
+      expect(response.status).toBe(expectedStatusCode);
+    });
+  });
+  describe("GET plants by user /:id/plants", () => {
+    const id = 1;
+    it("should return 200 status code if successful", async () => {
+      const expectedStatusCode = 200;
+      const response = await request(server).get(`/api/users/${id}`);
+      expect(response.status).toBe(expectedStatusCode);
+    });
+    it("should return the user's plants", async () => {
+      const response = await request(server).get(`/api/users/${id}`);
+      expect(response.body).toHaveLength(1);
+    });
+    it("should return 404 if no user is found", async () => {
+      const badId = 123454;
+      const expectedStatusCode = 404;
+      const response = await request(server).get(`/api/users/${badId}`);
+      expect(response.status).toBe(expectedStatusCode);
+    });
+  });
 
-//     describe("PUT /:id", () => {
-//       const id = 1;
-//       const editUser = { username: "edit tester" };
-//       it("should return 200 status code if successful", async () => {
-//         const expectedStatusCode = 200;
-//         const response = await request(server).put(`/api/users/${id}`).send(editUser);
-//         expect(response.status).toBe(expectedStatusCode);
-//       });
-//       it("should return the edited user object", async () => {
-//         const response = await request(server).put(`/api/users/${id}`).send(editUser);
-//         expect(response.body.id).toBe(id);
-//       });
-//       it("should return 404 if no user is found", async () => {
-//         const badId = 123454;
-//         const expectedStatusCode = 404;
-//         const response = await request(server).put(`/api/users/${badId}`);
-//         expect(response.status).toBe(expectedStatusCode);
-//       });
-//     });
-//   });
-//   describe("DELETE /:id", () => {
-//     const id = 1;
-//     it("should return 200 status code if successful", async () => {
-//       const expectedStatusCode = 200;
-//       const response = await request(server).delete(`/api/users/${id}`);
-//       expect(response.status).toBe(expectedStatusCode);
-//     });
-//     it("should return number of items deleted", async () => {
-//       const response = await request(server).delete(`/api/users/${id}`);
-//       expect(response.body).toBe(1);
-//     });
-//     it("should return 404 if no user is found", async () => {
-//       const badId = 123454;
-//       const expectedStatusCode = 404;
-//       const response = await request(server).delete(`/api/users/${badId}`);
-//       expect(response.status).toBe(expectedStatusCode);
-//     });
-//   });
-// });
+  describe("PUT /:id", () => {
+    const id = 1;
+    const editUser = { username: "edit tester" };
+    it("should return 200 status code if successful", async () => {
+      const expectedStatusCode = 200;
+      const response = await request(server).put(`/api/users/${id}`).send(editUser);
+      expect(response.status).toBe(expectedStatusCode);
+    });
+    it("should return the edited user object", async () => {
+      const response = await request(server).put(`/api/users/${id}`).send(editUser);
+      expect(response.body.id).toBe(id);
+    });
+    it("should return 404 if no user is found", async () => {
+      const badId = 123454;
+      const expectedStatusCode = 404;
+      const response = await request(server).put(`/api/users/${badId}`);
+      expect(response.status).toBe(expectedStatusCode);
+    });
+  });
+  // describe("DELETE /:id", () => {
+  //   const id = 1;
+  //   it("should return 200 status code if successful", async () => {
+  //     const expectedStatusCode = 200;
+  //     const response = await request(server).delete(`/api/users/${id}`);
+  //     expect(response.status).toBe(expectedStatusCode);
+  //   });
+  //   it("should return number of items deleted", async () => {
+  //     const response = await request(server).delete(`/api/users/${id}`);
+  //     expect(response.body).toBe(1);
+  //   });
+  //   it("should return 404 if no user is found", async () => {
+  //     const badId = 123454;
+  //     const expectedStatusCode = 404;
+  //     const response = await request(server).delete(`/api/users/${badId}`);
+  //     expect(response.status).toBe(expectedStatusCode);
+  //   });
+  // });
+});
 
 
 // // ------------------------------------- plants server ------------------------------------------

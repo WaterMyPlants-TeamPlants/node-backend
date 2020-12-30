@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 const usersRouter = require("./users/usersRouter");
 const plantsRouter = require("./plants/plantsRouter");
-const { validateUser, authorize, validateLoginBody, validateRegisterBody } = require("./middleware");
+const { validateUser, authorize, validateLoginBody, validateUserBody } = require("./middleware");
 const { addUser } = require("./users/usersModels");
 const secrets = require("../config/secrets");
 
@@ -38,7 +38,7 @@ server.post("/api/login", [validateLoginBody, validateUser], (req, res) => {
   }
 });
 
-server.post("/api/register", validateRegisterBody, (req, res) => {
+server.post("/api/register", validateUserBody, (req, res) => {
   const credentials = req.body;
   const hash = bcrypt.hashSync(credentials.password, 14);
   credentials.password = hash;

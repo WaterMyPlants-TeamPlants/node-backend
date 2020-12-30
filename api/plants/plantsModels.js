@@ -1,14 +1,14 @@
 const db = require("../../data/dbconfig");
 
 module.exports = {
-  getById,
+  getPlantById,
   getPlantsByUser,
   addPlant,
   editPlant,
   deletePlant
 };
 
-function getById(id) {
+function getPlantById(id) {
   return db("plants")
     .where({ id })
     .first();
@@ -23,7 +23,7 @@ function addPlant(body) {
   return db("plants")
     .insert(body)
     .then(id => {
-      return getById(id);
+      return getPlantById(id);
     });
 }
 
@@ -32,7 +32,7 @@ function editPlant(id, body) {
     .where({ id })
     .update(body)
     .then(data => {
-      return getById(id);
+      return getPlantById(id);
     });
 }
 
