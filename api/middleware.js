@@ -25,7 +25,7 @@ function validatePlantId(req, res, next) {
       }
     })
     .catch(err => {
-      console.log(err.message);
+      console.log(err);
       return res.status(500).json("Error while searching for plant.");
     });
 }
@@ -41,7 +41,7 @@ function validateUserId(req, res, next) {
       }
     })
     .catch(err => {
-      console.log(err.message);
+      console.log(err);
       return res.status(500).json("Error while searching for user.");
     });
 }
@@ -57,7 +57,7 @@ function validateUser(req, res, next) {
       }
     })
     .catch(err => {
-      console.log(err.message);
+      console.log(err);
       return res.status(500).json("Error while searching for user.");
     });
 }
@@ -70,7 +70,17 @@ function validateUserBody(req, res, next) {
   } else if (!req.body.telephone) {
     return res.status(400).json("Missing telephone number.");
   } else {
-    next();
+    getByUsername(req.body.username)
+    .then(data => {
+      console.log(data)
+      if (data) {
+        res.status(500).json("Username already taken.")
+      } else next();
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json("Error checking if username is taken.");
+    })
   }
 }
 
@@ -101,7 +111,7 @@ function validateOwnerId(req, res, next) {
         }
       })
       .catch(err => {
-        console.log(err.message);
+        console.log(err);
         return res.status(500).json("Error while searching for owner.");
       });
   } else {

@@ -25,7 +25,7 @@ function addUser(body) {
   return db("users")
     .insert(body)
     .then(id => {
-      return getById(id);
+      return getUserById(id);
     });
 }
 
@@ -34,7 +34,7 @@ function editUser(id, body) {
     .where({ id })
     .update(body)
     .then(data => {
-      return getById(id);
+      return getUserById(id);
     });
 }
 

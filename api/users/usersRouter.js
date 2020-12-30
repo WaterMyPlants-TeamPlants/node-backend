@@ -19,7 +19,7 @@ router.get("/:id/plants", validateUserId, (req, res) => {
     })
 })
 
-router.put("/:id", [validateUserId], (req, res) => {
+router.put("/:id", validateUserId, (req, res) => {
   editUser(req.params.id, req.body)
     .then(data => {
       res.status(200).json(data);
