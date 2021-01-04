@@ -91,7 +91,6 @@ Returns plant object
 - Add Plant
 
 Required fields:
-```
 { 
   "nickname": "plant nickname",
   "species": "species name",
