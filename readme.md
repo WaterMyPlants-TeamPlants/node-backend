@@ -2,7 +2,7 @@
 
 ## API URL
 
-TBA
+https://plantswater.herokuapp.com/
 
 ## API Documentation
 
