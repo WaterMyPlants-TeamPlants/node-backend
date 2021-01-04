@@ -65,23 +65,27 @@ Returns
 
 ### Users
 #### GET /api/users/:id
+```
 - Get User By ID
 
 Returns user object
-
+```
 #### PUT /api/users/:id
+```
 - Update User 
 
 Returns updated user object
-
+```
 ### Plants
 
 #### GET /api/plants/:id
+```
 - Get Plant By ID
 
 Returns plant object
-
+```
 #### POST /api/plants
+```
 - Add Plant
 
 Required fields:
@@ -95,13 +99,16 @@ Required fields:
 }
 ```
 Returns new plant object with id
-
+```
 #### PUT /api/plants/:id
+```
 - Update Plant
 
 Returns updated plant object
-
+```
 #### DELETE /api/plants/:id
+```
 - Delete Plant
 
 Returns number of deleted objects
+```
