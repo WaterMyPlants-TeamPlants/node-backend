@@ -22,7 +22,7 @@ server.post("/api/login", [validateLoginBody, validateUser], (req, res) => {
   const user = res.user;
   if (bcrypt.compareSync(req.body.password, user.password)) {
     const token = generateToken(user);
-    const noPasswordUser = { username: user.username, id: user.id, telephone: user.telephone }
+    const noPasswordUser = { username: user.username, id: user.id, telephone: user.telephone, plants: user.plants }
       return res.status(200).json({ user: noPasswordUser, token: token });
   } else {
     return res.status(401).json("Incorrect password.");

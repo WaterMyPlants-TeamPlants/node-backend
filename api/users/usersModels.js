@@ -8,17 +8,27 @@ module.exports = {
   deleteUser
 };
 
-function getUserById(id) {
+async function getUserById(id) {
+  let plants = await db("plants").where("user_id", id)
   return db("users")
     .where({ id })
     .select("username", "id", "telephone")
-    .first();
+    .first()
+    .then(data => {
+      data.plants = plants;
+      return Promise.resolve(data);
+    })
 }
 
 function getByUsername(username) {
   return db("users")
     .where({ username })
-    .first();
+    .first()
+    .then(async data => {
+      let plants = await db("plants").where("user_id", data.id)
+      data.plants = plants;
+      return Promise.resolve(data);
+    })
 }
 
 function addUser(body) {
