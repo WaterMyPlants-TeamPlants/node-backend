@@ -38,6 +38,7 @@ Returns
     "username": "uniqueUsername",
     "id": 1
     "telephone": "000-000-0000"
+    "plants": []
   }
 
 #### POST /auth/login
@@ -55,6 +56,7 @@ Returns
         "username": "uniqueUsername",
         "id": 1,
         "telephone": "000-000-0000"
+        "plants": []
     },
     "token": "authentication token"
 
