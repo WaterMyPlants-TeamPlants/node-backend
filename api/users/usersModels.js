@@ -9,7 +9,7 @@ module.exports = {
 };
 
 async function getUserById(id) {
-  let plants = await db("plants").where("user_id", id)
+  let plants = await db("plants").where("user_id", id);
   return db("users")
     .where({ id })
     .select("username", "id", "telephone")
@@ -17,7 +17,7 @@ async function getUserById(id) {
     .then(data => {
       data.plants = plants;
       return Promise.resolve(data);
-    })
+    });
 }
 
 function getByUsername(username) {
@@ -25,10 +25,12 @@ function getByUsername(username) {
     .where({ username })
     .first()
     .then(async data => {
-      let plants = await db("plants").where("user_id", data.id)
-      data.plants = plants;
-      return Promise.resolve(data);
-    })
+      if (data) {
+        let plants = await db("plants").where("user_id", data.username);
+        data.plants = plants;
+        return Promise.resolve(data);
+      } else return null;
+    });
 }
 
 function addUser(body) {
