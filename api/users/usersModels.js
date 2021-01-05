@@ -26,7 +26,7 @@ function getByUsername(username) {
     .first()
     .then(async data => {
       if (data) {
-        let plants = await db("plants").where("user_id", data.username);
+        let plants = await db("plants").where("user_id", data.id);
         data.plants = plants;
         return Promise.resolve(data);
       } else return null;
