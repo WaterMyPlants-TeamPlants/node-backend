@@ -24,7 +24,7 @@ This Web API follows the REST principles:
 - All Data is returned in JSON format
 
 ### Auth
-#### POST /auth/register
+#### POST /api/register
 Required fields:
 ```
 { 
@@ -41,7 +41,7 @@ Returns
     "plants": []
   }
 
-#### POST /auth/login
+#### POST /api/login
 Required fields:
 ```
 {
