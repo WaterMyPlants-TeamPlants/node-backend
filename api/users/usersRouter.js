@@ -2,6 +2,7 @@ const express = require("express");
 const { editUser } = require("./usersModels");
 const { getPlantsByUser } = require("../plants/plantsModels");
 const { validateUserId, } = require("../middleware");
+const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
@@ -20,7 +21,12 @@ router.get("/:id/plants", validateUserId, (req, res) => {
 })
 
 router.put("/:id", validateUserId, (req, res) => {
-  editUser(req.params.id, req.body)
+  const credentials = req.body;
+  if (req.body.password) {
+    const hash = bcrypt.hashSync(credentials.password, 14);
+    credentials.password = hash;
+  }
+  editUser(req.params.id, credentials)
     .then(data => {
       res.status(200).json(data);
     })

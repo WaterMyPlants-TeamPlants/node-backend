@@ -43,7 +43,7 @@ function addUser(body) {
 
 function editUser(id, body) {
   return db("users")
-    .where({ id })
+    .where({ id })  
     .update(body)
     .then(data => {
       return getUserById(id);
