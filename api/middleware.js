@@ -17,10 +17,13 @@ module.exports = {
 function validatePlantId(req, res, next) {
   getPlantById(req.params.id)
     .then(data => {
+      console.log("inside .then")
       if (data) {
+        console.log("inside next()")
         res.plant = data;
         next();
       } else {
+        console.log("inside res.status 404")
         return res.status(404).json("Plant not found.");
       }
     })
